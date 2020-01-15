@@ -33,8 +33,8 @@ uint64_t getBits(unsigned low, unsigned high, uint64_t source)
 {
     assert(high < 64 && (low <= high));
     uint64_t result = source >> low;
-    result = result << (64 - (high - low));
-    result = result >> (64 - (high - low));
+    result = result << (63 - (high - low));
+    result = result >> (63 - (high - low));
     return result;
 }
 /*-----------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ uint64_t getBits(unsigned low, unsigned high, uint64_t source)
 ------------------------------------------------------------------------------------------------*/
 uint64_t setBits(unsigned low, unsigned high, uint64_t source)
 {
-    uint64_t mask = (2 ^ (high - low + 1)) - 1;
+    uint64_t mask = (2 ^ ((high - low) + 1)) - 1;
     mask = mask << low;
     return source | mask;
 }
@@ -60,7 +60,7 @@ uint64_t setBits(unsigned low, unsigned high, uint64_t source)
 ------------------------------------------------------------------------------------------------*/
 uint64_t clearBits(unsigned low, unsigned high, uint64_t source)
 {
-    uint64_t mask = (2 ^ (high - low + 1)) - 1;
+    uint64_t mask = (2 ^ ((high - low) + 1)) - 1;
     mask = mask << low;
     mask = ~mask;
     return source & mask;
