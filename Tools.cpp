@@ -120,7 +120,7 @@ uint64_t assignOneBit(unsigned bitNum, unsigned bitVal, uint64_t source)
 ------------------------------------------------------------------------------------------------*/
 uint8_t getByteNumber(unsigned byteNum, uint64_t source)
 {
-    assert(byteNum < 8 && byteNum <= 0);
+    assert(byteNum < 8 && byteNum >= 0);
     uint8_t result = (source >> (byteNum * 8)) & 0xFF;
     return result;
 }

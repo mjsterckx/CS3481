@@ -7,8 +7,8 @@
 < efbtest: Tools.cpp:73: uint64_t Tools::clearBits(unsigned int, unsigned int, uint64_t): Assertion `high < 64 && low >= 0 && low <= high' failed.
 < efbtest: Tools.cpp:94: uint64_t Tools::assignOneBit(unsigned int, unsigned int, uint64_t): Assertion `bitNum >= 0 && bitNum < 64 && bitVal >= 0 && bitVal <= 1' failed.
 < efbtest: Tools.cpp:94: uint64_t Tools::assignOneBit(unsigned int, unsigned int, uint64_t): Assertion `bitNum >= 0 && bitNum < 64 && bitVal >= 0 && bitVal <= 1' failed.
-< efbtest: Tools.cpp:123: uint8_t Tools::getByteNumber(unsigned int, uint64_t): Assertion `byteNum < 8 && byteNum <= 0' failed.
-< efbtest: Tools.cpp:123: uint8_t Tools::getByteNumber(unsigned int, uint64_t): Assertion `byteNum < 8 && byteNum <= 0' failed.
+< efbtest: Tools.cpp:123: uint8_t Tools::getByteNumber(unsigned int, uint64_t): Assertion `byteNum < 8 && byteNum >= 0' failed.
+< efbtest: Tools.cpp:123: uint8_t Tools::getByteNumber(unsigned int, uint64_t): Assertion `byteNum < 8 && byteNum >= 0' failed.
 < efbtest: Tools.cpp:144: uint64_t Tools::putByteNumber(unsigned int, uint8_t, uint64_t): Assertion `byteNum < 8 && byteNum >= 0' failed.
 < efbtest: Tools.cpp:144: uint64_t Tools::putByteNumber(unsigned int, uint8_t, uint64_t): Assertion `byteNum < 8 && byteNum >= 0' failed.
 < efbtest: Tools.cpp:199: void Tools::expandBits(uint64_t, char*): Assertion `bits != 0' failed.
@@ -32,13 +32,3 @@
 > efbtest: Tools.cpp:210: void Tools::clearBuffer(char*, int): Assertion `pbuf != __null && size >= 0 && size <= (2147483647)' failed.
 > efbtest: Tools.cpp:210: void Tools::clearBuffer(char*, int): Assertion `pbuf != __null && size >= 0 && size <= (2147483647)' failed.
 > efbtest: Tools.cpp:210: void Tools::clearBuffer(char*, int): Assertion `pbuf != __null && size >= 0 && size <= (2147483647)' failed.
-6392c6392,6398
-< efbtest: Tools.cpp:123: uint8_t Tools::getByteNumber(unsigned int, uint64_t): Assertion `byteNum < 8 && byteNum <= 0' failed.
----
-> getByteNumber(1,123456789abcdef): cd
-> getByteNumber(2,123456789abcdef): ab
-> getByteNumber(3,123456789abcdef): 89
-> getByteNumber(4,123456789abcdef): 67
-> getByteNumber(5,123456789abcdef): 45
-> getByteNumber(6,123456789abcdef): 23
-> getByteNumber(7,123456789abcdef): 01
