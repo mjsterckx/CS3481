@@ -32,10 +32,14 @@ namespace Tools {
 uint64_t getBits(unsigned low, unsigned high, uint64_t source)
 {
     assert(high < 64 && (low <= high));
-    uint64_t result = source >> low;
-    result = result << (63 - (high - low));
-    result = result >> (63 - (high - low));
-    return result;
+    uint64_t mask = 1;
+    for (int i = 0; i < high - low; i++)
+    {
+        mask = mask << 1;
+        mask++;
+    }
+    mask = mask << low;
+    return (source & mask) >> low;
 }
 /*-----------------------------------------------------------------------------------------------
     setBits
@@ -46,7 +50,13 @@ uint64_t getBits(unsigned low, unsigned high, uint64_t source)
 ------------------------------------------------------------------------------------------------*/
 uint64_t setBits(unsigned low, unsigned high, uint64_t source)
 {
-    uint64_t mask = (2 ^ ((high - low) + 1)) - 1;
+    assert(high < 64 && low >= 0 && low <= high);
+    uint64_t mask = 1;
+    for (int i = 0; i < high - low; i++)
+    {
+	mask = mask << 1;
+	mask++;
+    }
     mask = mask << low;
     return source | mask;
 }
@@ -60,7 +70,13 @@ uint64_t setBits(unsigned low, unsigned high, uint64_t source)
 ------------------------------------------------------------------------------------------------*/
 uint64_t clearBits(unsigned low, unsigned high, uint64_t source)
 {
-    uint64_t mask = (2 ^ ((high - low) + 1)) - 1;
+    assert(high < 64 && low >= 0 && low <= high);
+    uint64_t mask = 1;
+    for (int i = 0; i < high - low; i++)
+    {
+	mask = mask << 1;
+	mask++;
+    }
     mask = mask << low;
     mask = ~mask;
     return source & mask;
@@ -75,6 +91,7 @@ uint64_t clearBits(unsigned low, unsigned high, uint64_t source)
 ------------------------------------------------------------------------------------------------*/
 uint64_t assignOneBit(unsigned bitNum, unsigned bitVal, uint64_t source)
 {
+    assert(bitNum >= 0 && bitNum < 64 && bitVal >= 0 && bitVal <= 1);
     uint64_t val = 1;
     val = val << bitNum;
     if (bitVal == 1)
@@ -83,7 +100,7 @@ uint64_t assignOneBit(unsigned bitNum, unsigned bitVal, uint64_t source)
     } else
     {
         val = ~val;
-        return source | val;
+        return source & val;
     }
 }
 
@@ -103,6 +120,7 @@ uint64_t assignOneBit(unsigned bitNum, unsigned bitVal, uint64_t source)
 ------------------------------------------------------------------------------------------------*/
 uint8_t getByteNumber(unsigned byteNum, uint64_t source)
 {
+    assert(byteNum < 8 && byteNum <= 0);
     uint8_t result = (source >> (byteNum * 8)) & 0xFF;
     return result;
 }
@@ -123,11 +141,14 @@ uint8_t getByteNumber(unsigned byteNum, uint64_t source)
 ------------------------------------------------------------------------------------------------*/
 uint64_t putByteNumber(unsigned byteNum, uint8_t byteVal, uint64_t source)
 {
-    uint64_t mask = 0x000000FF << (byteNum * 8);
+    assert(byteNum < 8 && byteNum >= 0);
+    uint64_t test = 0xFF;
+    uint64_t mask = test << (byteNum * 8);
     mask = ~mask;
     uint64_t masked = source & mask;
-    mask = byteVal << (byteNum * 8);
-    return masked | byteVal;                  
+    uint64_t expanded = byteVal;
+    uint64_t mask2 = expanded << (byteNum * 8);
+    return masked | mask2;                  
 }
 /*-----------------------------------------------------------------------------------------------
     buildWord
@@ -175,6 +196,7 @@ bool isNegative(uint64_t source)
 ------------------------------------------------------------------------------------------------*/
 void expandBits(uint64_t source, char *bits)
 {
+    assert(bits != 0);
     int index = 0;
     for (int i = 0; i < 8; i++)
     {
@@ -182,12 +204,12 @@ void expandBits(uint64_t source, char *bits)
         for (int j = 0; j < 8; j++)
         {
             uint64_t single = current >> (7 - j);
-	    if (single == 1)
-	    {
-		bits[index] = '1';
-	    } else
+	    if (single % 2 == 0)
 	    {
 		bits[index] = '0';
+	    } else
+	    {
+		bits[index] = '1';
 	    }
 	    index++;
         }
@@ -205,6 +227,7 @@ void expandBits(uint64_t source, char *bits)
 ------------------------------------------------------------------------------------------------*/
 void clearBuffer(char * pbuf, int size)
 {
+    assert(pbuf != 0 && size > 0);
     for (int i = 0; i < size; i++)
     {
 	pbuf[i] = 0;
