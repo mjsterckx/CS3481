@@ -1,0 +1,34 @@
+1,16c1,16
+< efbtest: Tools.cpp:34: uint64_t Tools::getBits(unsigned int, unsigned int, uint64_t): Assertion `high < 64 && (low <= high)' failed.
+< efbtest: Tools.cpp:34: uint64_t Tools::getBits(unsigned int, unsigned int, uint64_t): Assertion `high < 64 && (low <= high)' failed.
+< efbtest: Tools.cpp:53: uint64_t Tools::setBits(unsigned int, unsigned int, uint64_t): Assertion `high < 64 && low >= 0 && low <= high' failed.
+< efbtest: Tools.cpp:53: uint64_t Tools::setBits(unsigned int, unsigned int, uint64_t): Assertion `high < 64 && low >= 0 && low <= high' failed.
+< efbtest: Tools.cpp:73: uint64_t Tools::clearBits(unsigned int, unsigned int, uint64_t): Assertion `high < 64 && low >= 0 && low <= high' failed.
+< efbtest: Tools.cpp:73: uint64_t Tools::clearBits(unsigned int, unsigned int, uint64_t): Assertion `high < 64 && low >= 0 && low <= high' failed.
+< efbtest: Tools.cpp:94: uint64_t Tools::assignOneBit(unsigned int, unsigned int, uint64_t): Assertion `bitNum >= 0 && bitNum < 64 && bitVal >= 0 && bitVal <= 1' failed.
+< efbtest: Tools.cpp:94: uint64_t Tools::assignOneBit(unsigned int, unsigned int, uint64_t): Assertion `bitNum >= 0 && bitNum < 64 && bitVal >= 0 && bitVal <= 1' failed.
+< efbtest: Tools.cpp:123: uint8_t Tools::getByteNumber(unsigned int, uint64_t): Assertion `byteNum < 8 && byteNum >= 0' failed.
+< efbtest: Tools.cpp:123: uint8_t Tools::getByteNumber(unsigned int, uint64_t): Assertion `byteNum < 8 && byteNum >= 0' failed.
+< efbtest: Tools.cpp:144: uint64_t Tools::putByteNumber(unsigned int, uint8_t, uint64_t): Assertion `byteNum < 8 && byteNum >= 0' failed.
+< efbtest: Tools.cpp:144: uint64_t Tools::putByteNumber(unsigned int, uint8_t, uint64_t): Assertion `byteNum < 8 && byteNum >= 0' failed.
+< efbtest: Tools.cpp:199: void Tools::expandBits(uint64_t, char*): Assertion `bits != 0' failed.
+< efbtest: Tools.cpp:230: void Tools::clearBuffer(char*, int): Assertion `pbuf != 0 && size > 0' failed.
+< efbtest: Tools.cpp:230: void Tools::clearBuffer(char*, int): Assertion `pbuf != 0 && size > 0' failed.
+< efbtest: Tools.cpp:230: void Tools::clearBuffer(char*, int): Assertion `pbuf != 0 && size > 0' failed.
+---
+> efbtest: Tools.cpp:41: uint64_t Tools::getBits(unsigned int, unsigned int, uint64_t): Assertion `high < 64 && low <= high' failed.
+> efbtest: Tools.cpp:41: uint64_t Tools::getBits(unsigned int, unsigned int, uint64_t): Assertion `high < 64 && low <= high' failed.
+> efbtest: Tools.cpp:54: uint64_t Tools::setBits(unsigned int, unsigned int, uint64_t): Assertion `high < 64 && low <= high' failed.
+> efbtest: Tools.cpp:54: uint64_t Tools::setBits(unsigned int, unsigned int, uint64_t): Assertion `high < 64 && low <= high' failed.
+> efbtest: Tools.cpp:70: uint64_t Tools::clearBits(unsigned int, unsigned int, uint64_t): Assertion `high < 64 && low <= high' failed.
+> efbtest: Tools.cpp:70: uint64_t Tools::clearBits(unsigned int, unsigned int, uint64_t): Assertion `high < 64 && low <= high' failed.
+> efbtest: Tools.cpp:86: uint64_t Tools::assignOneBit(unsigned int, unsigned int, uint64_t): Assertion `bitNum < 64 && (bitVal == 0 || bitVal == 1)' failed.
+> efbtest: Tools.cpp:86: uint64_t Tools::assignOneBit(unsigned int, unsigned int, uint64_t): Assertion `bitNum < 64 && (bitVal == 0 || bitVal == 1)' failed.
+> efbtest: Tools.cpp:107: uint8_t Tools::getByteNumber(unsigned int, uint64_t): Assertion `byteNum < (64/8)' failed.
+> efbtest: Tools.cpp:107: uint8_t Tools::getByteNumber(unsigned int, uint64_t): Assertion `byteNum < (64/8)' failed.
+> efbtest: Tools.cpp:129: uint64_t Tools::putByteNumber(unsigned int, uint8_t, uint64_t): Assertion `byteNum < (64/8)' failed.
+> efbtest: Tools.cpp:129: uint64_t Tools::putByteNumber(unsigned int, uint8_t, uint64_t): Assertion `byteNum < (64/8)' failed.
+> efbtest: Tools.cpp:187: void Tools::expandBits(uint64_t, char*): Assertion `bits != __null' failed.
+> efbtest: Tools.cpp:210: void Tools::clearBuffer(char*, int): Assertion `pbuf != __null && size >= 0 && size <= (2147483647)' failed.
+> efbtest: Tools.cpp:210: void Tools::clearBuffer(char*, int): Assertion `pbuf != __null && size >= 0 && size <= (2147483647)' failed.
+> efbtest: Tools.cpp:210: void Tools::clearBuffer(char*, int): Assertion `pbuf != __null && size >= 0 && size <= (2147483647)' failed.
